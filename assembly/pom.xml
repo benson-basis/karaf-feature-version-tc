@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright 2015 Basis Technology Corp.
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.basistech</groupId>
+    <artifactId>karaf-feature-version-confusion-assembly</artifactId>
+    <parent>
+        <groupId>com.basistech</groupId>
+        <artifactId>karaf-feature-version-confusion</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <packaging>karaf-assembly</packaging>
+        <dependencies>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>framework</artifactId>
+            <version>${karaf-version}</version>
+            <type>kar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>standard</artifactId>
+            <version>${karaf-version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf.karaf</groupId>
+            <artifactId>apache-cxf</artifactId>
+            <version>${cxf-version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>karaf-feature-version-confusion-desc</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/filtered-resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <version>4.0.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                  <installAllFeaturesByDefault>true</installAllFeaturesByDefault>
+                    <bootFeatures>
+                        <feature>aries-blueprint</feature>
+                        <feature>bundle</feature>
+                        <feature>config</feature>
+                        <feature>diagnostic</feature>
+                        <feature>feature</feature>
+                        <feature>jaas</feature>
+                        <feature>shell</feature>
+                        <feature>log</feature>
+                        <feature>management</feature>
+                        <feature>package</feature>
+                        <feature>shell-compat</feature>
+                        <feature>ssh</feature>
+                        <feature>system</feature>
+                        <feature>wrap</feature>
+                        <feature>jolokia</feature>
+                        <feature>war</feature>
+                        <feature>cxf-jaxrs</feature>
+                        <feature>scr</feature>
+                        <feature>bean-validation-support</feature>
+                        <feature>rosette-api</feature>
+                        <feature>rosapi-common</feature>
+                        <feature>rosapi-front-end-null-request-tracker</feature>
+                        <feature>rosapi-front-end-anvils-transport</feature>
+                        <feature>rosapi-front-end-service</feature>
+                        <feature>rosapi-worker-bus</feature>
+                        <feature>rosapi-worker-service</feature>
+                        <feature>rosapi-worker-template-tokenizer-sdk</feature>
+                        <feature>rosapi-worker-mock-rli-sdk</feature>
+                        <feature>rosapi-worker-mock-name-translation-sdk</feature>
+                        <feature>rosapi-worker-mock-pairwise-name-matching-sdk</feature>
+                        <feature>rosapi-worker-mock-download-text-extraction-component</feature>
+                    </bootFeatures>
+                    <startupFeatures>
+
+                    </startupFeatures>
+                    <archiveZip>false</archiveZip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
